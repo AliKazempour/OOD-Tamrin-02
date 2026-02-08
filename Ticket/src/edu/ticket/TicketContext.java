@@ -40,5 +40,6 @@ public class TicketContext {
     }
 
     public void transitionTo(TicketState nextState) {
-        ticket.setState(nextState); 
+        ticket.setState(nextState); // Ticket خودش status رو هم sync می‌کنه
+    }
 }
