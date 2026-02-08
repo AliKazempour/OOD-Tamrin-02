@@ -18,5 +18,11 @@ public class Main {
         );
 
         ticketService.handle(ticket);
+        ticketService.handle(ticket);
+        ticketService.handle(ticket);
+        ticketService.handle(ticket);
+        ticketService.handle(ticket);
+        ticketService.handle(ticket);
+
     }
 }
