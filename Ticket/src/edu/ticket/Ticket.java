@@ -1,41 +1,33 @@
 package edu.ticket;
 
 public class Ticket {
-    int id;
-    String status = "NEW";
-    String channel;
-    String type;
-    String request;
-    String response;
+    private final int id;
+    private final Channel channel;
+    private final TicketType type;
 
-    public Ticket(int id,String channel, String type) {
+    private String request;
+    private TicketStatus status;
+    private String assignedTeam;
+    private String response;
+
+    public Ticket(int id, Channel channel, TicketType type, String request) {
         this.id = id;
         this.channel = channel;
         this.type = type;
+        this.request = request;
+        this.status = TicketStatus.NEW;
     }
 
-    public String getStatus() {
-        return status;
+    public int getId() {
+        return id;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getChannel() {
+    public Channel getChannel() {
         return channel;
     }
 
-    public void setChannel(String channel) {
-        this.channel = channel;
-    }
-
-    public String getType() {
+    public TicketType getType() {
         return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getRequest() {
@@ -46,15 +38,27 @@ public class Ticket {
         this.request = request;
     }
 
+    public TicketStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TicketStatus status) {
+        this.status = status;
+    }
+
+    public String getAssignedTeam() {
+        return assignedTeam;
+    }
+
+    public void setAssignedTeam(String assignedTeam) {
+        this.assignedTeam = assignedTeam;
+    }
+
     public String getResponse() {
         return response;
     }
 
     public void setResponse(String response) {
         this.response = response;
-    }
-
-    public int getId() {
-        return this.id;
     }
 }

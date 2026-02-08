@@ -2,54 +2,59 @@ package edu.ticket;
 
 public class TicketService {
 
-
     public void handle(Ticket ticket) {
-        String currentStatus = ticket.status;
-        String type = ticket.type;
-        String channel = ticket.channel;
 
-        if (currentStatus.equals("NEW")) {
+        TicketStatus currentStatus = ticket.getStatus();
+        TicketType type = ticket.getType();
+        Channel channel = ticket.getChannel();
+
+        if (currentStatus == TicketStatus.NEW) {
             System.out.println("Ticket created");
 
-            if (channel.equals("WEB")) {
+            if (channel == Channel.WEB) {
                 System.out.println("Received from web");
-            } else if (channel.equals("EMAIL")) {
+            } else if (channel == Channel.EMAIL) {
                 System.out.println("Received from email");
             }
 
-            ticket.setStatus("ASSIGNED");
+            ticket.setStatus(TicketStatus.ASSIGNED);
         }
 
-        if (currentStatus.equals("ASSIGNED")) {
-            if (type.equals("BUG")) {
+        if (currentStatus == TicketStatus.ASSIGNED) {
+            if (type == TicketType.BUG) {
                 System.out.println("Assigned to engineering");
             } else {
                 System.out.println("Assigned to support");
             }
-            ticket.setStatus("IN_PROGRESS");
+            ticket.setStatus(TicketStatus.IN_PROGRESS);
         }
 
-        if (currentStatus.equals("IN_PROGRESS")) {
+        if (currentStatus == TicketStatus.IN_PROGRESS) {
             System.out.println("Working on ticket");
 
-            if (type.equals("BUG")) {
+            if (type == TicketType.BUG) {
                 System.out.println("Sending bug response");
             } else {
                 System.out.println("Sending generic response");
             }
 
-            ticket.setStatus("RESOLVED");
+            ticket.setStatus(TicketStatus.RESOLVED);
         }
 
-        if (currentStatus.equals("RESOLVED")) {
+        if (currentStatus == TicketStatus.RESOLVED) {
             System.out.println("Ticket resolved");
-            ticket.setStatus("CLOSED") ;
+            ticket.setStatus(TicketStatus.CLOSED);
         }
 
-        if (currentStatus.equals("CLOSED")) {
+        if (currentStatus == TicketStatus.CLOSED) {
             System.out.println("Ticket closed");
         }
 
-        System.out.println("Logging ticket handling : " + ticket.getId() + " -> " + ticket.status);
+        System.out.println(
+            "Logging ticket handling : " +
+            ticket.getId() +
+            " -> " +
+            ticket.getStatus()
+        );
     }
 }
