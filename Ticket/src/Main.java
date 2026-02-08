@@ -1,14 +1,16 @@
-import edu.ticket.Ticket;
-import edu.ticket.TicketService;
-import edu.ticket.Channel;
-import edu.ticket.TicketType;
-import edu.ticket.ConsoleTicketLogger;
+import edu.ticket.*;
+import edu.ticket.strategy.TypeBasedAssignmentStrategy;
+import edu.ticket.strategy.TypeBasedResponseStrategy;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        TicketService ticketService = new TicketService(new ConsoleTicketLogger());
+        TicketService ticketService = new TicketService(
+                new ConsoleTicketLogger(),
+                new TypeBasedAssignmentStrategy(),
+                new TypeBasedResponseStrategy()
+        );
 
         Ticket ticket = new Ticket(
                 1,
@@ -17,12 +19,9 @@ public class Main {
                 "I see a very very BAD BUG!"
         );
 
-        ticketService.handle(ticket);
-        ticketService.handle(ticket);
-        ticketService.handle(ticket);
-        ticketService.handle(ticket);
-        ticketService.handle(ticket);
-        ticketService.handle(ticket);
-
+        
+        for (int i = 0; i < 5; i++) {
+            ticketService.handle(ticket);
+        }
     }
 }

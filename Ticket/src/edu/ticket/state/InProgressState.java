@@ -1,6 +1,8 @@
 package edu.ticket.state;
 
-import edu.ticket.*;
+import edu.ticket.Ticket;
+import edu.ticket.TicketContext;
+import edu.ticket.TicketStatus;
 
 public class InProgressState implements TicketState {
 
@@ -15,11 +17,10 @@ public class InProgressState implements TicketState {
 
         System.out.println("Working on ticket");
 
-        if (ticket.getType() == TicketType.BUG) {
-            System.out.println("Sending bug response");
-        } else {
-            System.out.println("Sending generic response");
-        }
+        String response = ctx.getResponseStrategy().createResponse(ticket);
+        ticket.setResponse(response);
+
+        System.out.println("Sending response: " + response);
 
         ctx.transitionTo(new ResolvedState());
     }
