@@ -2,6 +2,12 @@ package edu.ticket;
 
 public class TicketService {
 
+    private final TicketLogger logger;
+
+    public TicketService(TicketLogger logger) {
+        this.logger = logger;
+    }
+
     public void handle(Ticket ticket) {
 
         TicketStatus currentStatus = ticket.getStatus();
@@ -50,11 +56,7 @@ public class TicketService {
             System.out.println("Ticket closed");
         }
 
-        System.out.println(
-            "Logging ticket handling : " +
-            ticket.getId() +
-            " -> " +
-            ticket.getStatus()
-        );
+        // ✅ Logging moved out (still called here, but implementation is decoupled)
+        logger.log(ticket, "Handled -> status=" + ticket.getStatus());
     }
 }
